@@ -1,0 +1,6 @@
+{
+    "C_Cpp.errorSquiggles": "disabled", // FixMe
+    "files.associations": {
+        "ostream": "cpp"
+    }
+}
