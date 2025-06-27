@@ -13,7 +13,7 @@ PORT=COM8
 
 
 BAUD=115200
-PROJECT_NAME=esp32-gamepad-starter
+PROJECT_NAME=mini-gt-rc
 SKETCH=$(PROJECT_NAME).ino
 
 # === Arduino CLI settings ===
