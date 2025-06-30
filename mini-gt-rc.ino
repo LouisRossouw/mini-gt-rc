@@ -2,6 +2,8 @@
 #include <Arduino.h>
 #include <Bluepad32.h>
 
+ServoStep myServo(3);
+
 // Arduino setup function. Runs in CPU 1
 void setup()
 {
@@ -37,16 +39,13 @@ void setupPins()
 
 void servoSetup()
 {
-  const int servoPin = Car::MotorRear.pin; // replace with your pin
-  const int pwmChannel = Car::MotorRear.pin;
-  const int pwmFreq = 50;       // 50Hz = 20ms period
-  const int pwmResolution = 16; // 16-bit resolution = 0–65535
+  const int servoPin = 3; // replace with your pin
+  const int pwmChannel = 0;
+  const int pwmFreq = 200;     // 50Hz = 20ms period
+  const int pwmResolution = 8; // 16-bit resolution = 0–65535
 
   ledcSetup(pwmChannel, pwmFreq, pwmResolution);
   ledcAttachPin(servoPin, pwmChannel);
-
-  // Move servo to center (90°)
-  writeServoAngle(90);
 }
 
 void loop()
@@ -59,13 +58,4 @@ void loop()
   Car::loop();
 
   delay(150);
-}
-
-void writeServoAngle(int angle)
-{
-  // Map angle (0–180) to pulse width (1ms–2ms), converted to 16-bit value
-  int dutyMin = 3277; // ~1ms at 50Hz = 3277 ticks
-  int dutyMax = 6554; // ~2ms at 50Hz = 6554 ticks
-  int duty = map(angle, 0, 180, dutyMin, dutyMax);
-  ledcWrite(Car::MotorRear.pin, duty);
 }

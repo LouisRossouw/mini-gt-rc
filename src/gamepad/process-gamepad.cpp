@@ -1,5 +1,6 @@
 #include "../dev/dev.h"
 #include "../car/car.h"
+#include "../globals.h"
 
 #include "gamepad.h"
 #include <Arduino.h>
@@ -47,6 +48,17 @@ void processGamepad(ControllerPtr ctl)
     if (ctl->dpad() & 0x01)
     {
         Car::toggleLights();
+    }
+
+    if (ctl->x())
+    {
+        Car::driveForward();
+    }
+
+    if (ctl->axisY())
+    {
+
+        myServo.servoSpin(ctl->axisY());
     }
 
     // the start button + select button

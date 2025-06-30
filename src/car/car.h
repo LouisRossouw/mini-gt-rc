@@ -36,6 +36,9 @@ public:
     static void toggleHeadLights();
     static void toggleLights();
 
+    static bool activeDrive;
+    static void driveForward();
+
     static void loop();
 
     static bool activeLights;
@@ -59,7 +62,7 @@ public:
         uint8_t pin;
     };
 
-    static constexpr MotorConfig MotorRear = {19};
+    static constexpr MotorConfig MotorRear = {18};
 };
 
 #endif
