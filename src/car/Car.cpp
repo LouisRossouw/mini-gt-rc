@@ -26,6 +26,9 @@ bool Car::activeDrive = false;
 int maxBrightness = Car::RearLights.maxBrightness;
 int defaultBrightness = Car::RearLights.defaultBrightness;
 
+// TODO; Rename flicker to indicator
+// TODO; Fix file names / investigate as to why they are capitalized? is that a c++ must?
+
 void Car::toggleLeftFlicker()
 
 {
