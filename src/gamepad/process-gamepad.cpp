@@ -8,23 +8,12 @@
 
 void processGamepad(ControllerPtr ctl)
 {
-    // Toggle rearlights
-    // if (ctl->dpad() & 0x02)
-    // {
-    //     Car::toggleRearLights();
-    // }
 
     // Toggle rear brake lights
     if (ctl->a())
     {
         Car::toggleBrakeLights();
     }
-
-    // Toggle headlights
-    // if (ctl->dpad() & 0x01)
-    // {
-    //     Car::toggleHeadLights();
-    // }
 
     // Toggle left flicker light.
     if (ctl->dpad() & 0x08)

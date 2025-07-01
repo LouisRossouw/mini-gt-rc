@@ -6,6 +6,8 @@
 #include <Arduino.h>
 #include <Bluepad32.h>
 
+// Refer to Bluepad32 controller.ino example code for more info.
+
 ControllerPtr myControllers[BP32_MAX_GAMEPADS];
 
 // This callback gets called any time a new gamepad is connected. up to 4 gamepads at a time.

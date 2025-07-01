@@ -51,7 +51,7 @@ public:
         uint8_t maxBrightness;
     };
 
-    static constexpr LightConfig LeftFlicker = {21, 0, 255};
+    static constexpr LightConfig LeftFlicker = {21, 0, 255}; // pin, defaultBrightness, maxBrightness
     static constexpr LightConfig RightFlicker = {20, 0, 255};
     static constexpr LightConfig HeadLights = {2, 0, 255};
     static constexpr LightConfig RearLights = {1, 40, 255};

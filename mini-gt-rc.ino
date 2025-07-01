@@ -4,7 +4,6 @@
 
 ServoStep myServo(3);
 
-// Arduino setup function. Runs in CPU 1
 void setup()
 {
   Serial.begin(115200);
@@ -20,28 +19,33 @@ void setup()
 
 void setupPins()
 {
-  const int rearLightPin = Car::RearLights.pin; // GPIO2 for rear/brake lights
-  const int pwmChannel = Car::RearLights.pin;   // Choose a free PWM channel
-  const int pwmFreq = 5000;                     // 5kHz
-  const int pwmResolution = 8;                  // 8-bit resolution: 0-255
+  // Updating lights with PWN signla; to simulate brake lights
+  const int rearLightPin = Car::RearLights.pin;
+  const int pwmChannel = Car::RearLights.pin;
+  const int pwmFreq = 5000;
+  const int pwmResolution = 8;
 
   // RearLights
   ledcSetup(pwmChannel, pwmFreq, pwmResolution);
   ledcAttachPin(rearLightPin, pwmChannel);
 
-  pinMode(Car::HeadLights.pin, OUTPUT); // Headlights
+  // Headlights
+  pinMode(Car::HeadLights.pin, OUTPUT);
 
-  pinMode(Car::LeftFlicker.pin, OUTPUT);  // Left indicators
-  pinMode(Car::RightFlicker.pin, OUTPUT); // Right indicators
+  // indicators
+  pinMode(Car::LeftFlicker.pin, OUTPUT);
+  pinMode(Car::RightFlicker.pin, OUTPUT);
 
   servoSetup();
 }
 
 void servoSetup()
 {
-  const int servoPin = 3; // replace with your pin
+  // Updating the servo with PWN signals, as there is no servo lib for esp32-c3
+  // * Works great with the servo plugged into 3v and not 5v.
+  const int servoPin = 3;
   const int pwmChannel = 0;
-  const int pwmFreq = 200;     // 50Hz = 20ms period
+  const int pwmFreq = 200;
   const int pwmResolution = 8; // 16-bit resolution = 0–65535
 
   ledcSetup(pwmChannel, pwmFreq, pwmResolution);

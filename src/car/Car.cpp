@@ -23,8 +23,6 @@ bool Car::activeLights = false;
 
 bool Car::activeDrive = false;
 
-// ServoStep myServo(3);
-
 int maxBrightness = Car::RearLights.maxBrightness;
 int defaultBrightness = Car::RearLights.defaultBrightness;
 
@@ -155,6 +153,7 @@ bool Car::areHazardsOn()
     return isLeftFlickerEnabled && isRightFlickerEnabled;
 }
 
+// Test; RemoveMe
 void Car::driveForward()
 {
     activeDrive = !activeDrive;
