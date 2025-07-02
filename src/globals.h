@@ -9,5 +9,6 @@
 #include "gamepad/gamepad.h"
 
 extern ServoStep myServo;
+extern ServoStep myServoTest;
 
 #endif
