@@ -156,28 +156,6 @@ bool Car::areHazardsOn()
     return isLeftFlickerEnabled && isRightFlickerEnabled;
 }
 
-// Test; RemoveMe
-void Car::driveForward()
-{
-    activeDrive = !activeDrive;
-    Dev::log("*** Drive forward for ffs - " + String(activeDrive ? "on" : "off"));
-    // myServo.servoSpin(activeDrive ? 127 : 127.5);
-    myServo.servoSpin(125);
-    delay(1000);
-    myServo.servoSpin(126);
-    delay(1000);
-    myServo.servoSpin(127);
-    delay(1000);
-    myServo.servoSpin(127.9548);
-    delay(1000);
-    myServo.servoSpin(128);
-    delay(1000);
-    myServo.servoSpin(130);
-    delay(1000);
-
-    // myServo.servoSpin(activeDrive ? 127 : 127.5);
-}
-
 // Loop that is used in the .ino loop.
 void Car::loop()
 {
