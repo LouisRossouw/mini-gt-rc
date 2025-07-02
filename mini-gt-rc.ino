@@ -2,7 +2,8 @@
 #include <Arduino.h>
 #include <Bluepad32.h>
 
-ServoStep myServo(3);
+ServoStep myServo(3, 2);
+ServoStep myServoTest(4, 4);
 
 void setup()
 {
@@ -35,21 +36,6 @@ void setupPins()
   // indicators
   pinMode(Car::LeftFlicker.pin, OUTPUT);
   pinMode(Car::RightFlicker.pin, OUTPUT);
-
-  servoSetup();
-}
-
-void servoSetup()
-{
-  // Updating the servo with PWN signals, as there is no servo lib for esp32-c3
-  // * Works great with the servo plugged into 3v and not 5v.
-  const int servoPin = 3;
-  const int pwmChannel = 0;
-  const int pwmFreq = 200;
-  const int pwmResolution = 8; // 16-bit resolution = 0–65535
-
-  ledcSetup(pwmChannel, pwmFreq, pwmResolution);
-  ledcAttachPin(servoPin, pwmChannel);
 }
 
 void loop()
