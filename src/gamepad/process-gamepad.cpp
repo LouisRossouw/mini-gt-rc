@@ -44,10 +44,21 @@ void processGamepad(ControllerPtr ctl)
         Car::driveForward();
     }
 
+    if (ctl->b())
+    {
+        myServoTest.servoUp();
+    }
+
     if (ctl->axisY())
     {
 
         myServo.servoSpin(ctl->axisY());
+    }
+
+    if (ctl->axisRX())
+    {
+
+        myServoTest.servoTurn(ctl->axisRX());
     }
 
     // the start button + select button
