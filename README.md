@@ -1,8 +1,9 @@
-WIP
+Firmware for a micro RC; using an xbox one controller + an esp32-c3 super mini + Mini GT #658 1:64 car.
+
 Simple setup, uses arduino-cli and make,
 Currently setup for esp32-c3 & esp32-wroom-32
 
-TO run:
+To run:
 
 - If on windows, use git bash in project directory to run "make"
 - use the commands in the Makefile to compile / upload / monitor. ie run "make" in the terminal of the project and it will run the default command found in the Makefile, or "make monitor" etc
