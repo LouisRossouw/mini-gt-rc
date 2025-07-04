@@ -20,7 +20,7 @@ void setup()
 
 void setupPins()
 {
-  // Updating lights with PWN signla; to simulate brake lights
+  // Updating lights with PWM signla; to simulate brake lights
   const int rearLightPin = Car::RearLights.pin;
   const int pwmChannel = Car::RearLights.pin;
   const int pwmFreq = 5000;
