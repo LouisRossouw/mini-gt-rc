@@ -39,16 +39,6 @@ void processGamepad(ControllerPtr ctl)
         Car::toggleLights();
     }
 
-    if (ctl->x())
-    {
-        Car::driveForward();
-    }
-
-    if (ctl->b())
-    {
-        myServoTest.servoUp();
-    }
-
     if (ctl->axisY())
     {
 
