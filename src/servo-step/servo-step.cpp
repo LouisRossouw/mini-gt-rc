@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#include "ServoStep.h"
+#include "servo-step.h"
 #include "../globals.h"
 
 #include "../car/car.h"
