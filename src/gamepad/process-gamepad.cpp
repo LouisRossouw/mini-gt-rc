@@ -15,6 +15,19 @@ void processGamepad(ControllerPtr ctl)
         Car::toggleBrakeLights();
     }
 
+    if (ctl->x())
+    {
+        digitalWrite(LED_BUILTIN, LOW);
+    }
+    if (ctl->y())
+    {
+        Car::toggleDriveMode();
+    }
+    if (ctl->b())
+    {
+        Car::toggleBrightHeadLights();
+    }
+
     // Toggle left flicker light.
     if (ctl->dpad() & 0x08)
     {
@@ -41,14 +54,13 @@ void processGamepad(ControllerPtr ctl)
 
     if (ctl->axisY())
     {
-
-        myServo.servoSpin(ctl->axisY());
+        myServo.servoSpin(-ctl->axisY()); // Note: Reversed the values.
     }
 
     if (ctl->axisRX())
     {
 
-        myServoTest.servoTurn(ctl->axisRX());
+        myServoTest.servoTurn(-ctl->axisRX()); // Note: Reversed the values.
     }
 
     // the start button + select button
