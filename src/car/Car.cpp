@@ -4,14 +4,14 @@
 #include "../dev/dev.h"
 
 // Left indicators
-bool Car::isLeftFlickerLedOn = false;
-bool Car::isLeftFlickerEnabled = false;
-unsigned long Car::lastLeftFlickerToggleTime = 0;
+bool Car::isLeftIndicatorLedOn = false;
+bool Car::isLeftIndicatorEnabled = false;
+unsigned long Car::lastLeftIndicatorToggleTime = 0;
 
 // Left indicators
-bool Car::isRightFlickerLedOn = false;
-bool Car::isRightFlickerEnabled = false;
-unsigned long Car::lastRightFlickerToggleTime = 0;
+bool Car::isRightIndicatorLedOn = false;
+bool Car::isRightIndicatorEnabled = false;
+unsigned long Car::lastRightIndicatorToggleTime = 0;
 
 // Headlights
 bool Car::isHeadLightsEnabled = false;
@@ -30,9 +30,6 @@ int defaultBrightness = Car::RearLights.defaultBrightness;
 
 int Car::driveMode = 0;
 
-// TODO; Rename flicker to indicator
-// TODO; Fix file names / investigate as to why they are capitalized? is that a c++ must?
-
 void Car::toggleDriveMode()
 {
     driveMode += 1;
@@ -43,83 +40,83 @@ void Car::toggleDriveMode()
     }
 }
 
-void Car::toggleLeftFlicker()
+void Car::toggleLeftIndicator()
 {
-    isLeftFlickerEnabled = !isLeftFlickerEnabled;
+    isLeftIndicatorEnabled = !isLeftIndicatorEnabled;
 
-    if (!isLeftFlickerEnabled)
+    if (!isLeftIndicatorEnabled)
     {
-        digitalWrite(Car::LeftFlicker.pin, LOW);
-        isLeftFlickerLedOn = false;
+        digitalWrite(Car::LeftIndicator.pin, LOW);
+        isLeftIndicatorLedOn = false;
     };
 
-    digitalWrite(RightFlicker.pin, LOW);
+    digitalWrite(RightIndicator.pin, LOW);
 
-    isRightFlickerEnabled = false;
-    isRightFlickerLedOn = false;
+    isRightIndicatorEnabled = false;
+    isRightIndicatorLedOn = false;
 }
 
-void Car::updateLeftFlicker()
+void Car::updateLeftIndicator()
 {
-    if (!isLeftFlickerEnabled)
+    if (!isLeftIndicatorEnabled)
         return;
 
     unsigned long now = millis();
-    if (now - lastLeftFlickerToggleTime >= 500)
+    if (now - lastLeftIndicatorToggleTime >= 500)
     {
-        lastLeftFlickerToggleTime = now;
-        isLeftFlickerLedOn = !isLeftFlickerLedOn;
-        digitalWrite(Car::LeftFlicker.pin, isLeftFlickerLedOn ? HIGH : LOW);
+        lastLeftIndicatorToggleTime = now;
+        isLeftIndicatorLedOn = !isLeftIndicatorLedOn;
+        digitalWrite(Car::LeftIndicator.pin, isLeftIndicatorLedOn ? HIGH : LOW);
     };
 }
 
-void Car::toggleRightFlicker()
+void Car::toggleRightIndicator()
 {
-    isRightFlickerEnabled = !isRightFlickerEnabled;
+    isRightIndicatorEnabled = !isRightIndicatorEnabled;
 
-    if (!isRightFlickerEnabled)
+    if (!isRightIndicatorEnabled)
     {
-        digitalWrite(Car::RightFlicker.pin, LOW);
-        isRightFlickerLedOn = false;
+        digitalWrite(Car::RightIndicator.pin, LOW);
+        isRightIndicatorLedOn = false;
     };
 
-    digitalWrite(Car::LeftFlicker.pin, LOW);
+    digitalWrite(Car::LeftIndicator.pin, LOW);
 
-    isLeftFlickerEnabled = false;
-    isLeftFlickerLedOn = false;
+    isLeftIndicatorEnabled = false;
+    isLeftIndicatorLedOn = false;
 }
 
 void Car::toggleHazardLights()
 {
 
-    isLeftFlickerEnabled = !isLeftFlickerEnabled;
+    isLeftIndicatorEnabled = !isLeftIndicatorEnabled;
 
-    if (!isLeftFlickerEnabled)
+    if (!isLeftIndicatorEnabled)
     {
-        digitalWrite(Car::LeftFlicker.pin, LOW);
-        isLeftFlickerLedOn = false;
+        digitalWrite(Car::LeftIndicator.pin, LOW);
+        isLeftIndicatorLedOn = false;
     };
 
-    isRightFlickerEnabled = !isRightFlickerEnabled;
+    isRightIndicatorEnabled = !isRightIndicatorEnabled;
 
-    if (!isRightFlickerEnabled)
+    if (!isRightIndicatorEnabled)
     {
-        digitalWrite(Car::RightFlicker.pin, LOW);
-        isRightFlickerLedOn = false;
+        digitalWrite(Car::RightIndicator.pin, LOW);
+        isRightIndicatorLedOn = false;
     };
 }
 
-void Car::updateRightFlicker()
+void Car::updateRightIndicator()
 {
-    if (!isRightFlickerEnabled)
+    if (!isRightIndicatorEnabled)
         return;
 
     unsigned long now = millis();
-    if (now - lastRightFlickerToggleTime >= 500)
+    if (now - lastRightIndicatorToggleTime >= 500)
     {
-        lastRightFlickerToggleTime = now;
-        isRightFlickerLedOn = !isRightFlickerLedOn;
-        digitalWrite(Car::RightFlicker.pin, isRightFlickerLedOn ? HIGH : LOW);
+        lastRightIndicatorToggleTime = now;
+        isRightIndicatorLedOn = !isRightIndicatorLedOn;
+        digitalWrite(Car::RightIndicator.pin, isRightIndicatorLedOn ? HIGH : LOW);
     };
 }
 
@@ -184,12 +181,12 @@ void Car::toggleBrakeLights()
 
 bool Car::areHazardsOn()
 {
-    return isLeftFlickerEnabled && isRightFlickerEnabled;
+    return isLeftIndicatorEnabled && isRightIndicatorEnabled;
 }
 
 // Loop that is used in the .ino loop.
 void Car::loop()
 {
-    Car::updateLeftFlicker();
-    Car::updateRightFlicker();
+    Car::updateLeftIndicator();
+    Car::updateRightIndicator();
 }

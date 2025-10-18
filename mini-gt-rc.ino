@@ -40,8 +40,8 @@ void setupPins()
   ledcAttachPin(headLightsPin, hdpwmChannel);
 
   // indicators
-  pinMode(Car::LeftFlicker.pin, OUTPUT);
-  pinMode(Car::RightFlicker.pin, OUTPUT);
+  pinMode(Car::LeftIndicator.pin, OUTPUT);
+  pinMode(Car::RightIndicator.pin, OUTPUT);
 }
 
 void loop()

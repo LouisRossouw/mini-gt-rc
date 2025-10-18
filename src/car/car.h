@@ -7,21 +7,21 @@ class Car
 {
 public:
     // Indicators
-    static bool isLeftFlickerLedOn;
-    static bool isLeftFlickerEnabled;
-    static unsigned long lastLeftFlickerToggleTime;
+    static bool isLeftIndicatorLedOn;
+    static bool isLeftIndicatorEnabled;
+    static unsigned long lastLeftIndicatorToggleTime;
 
-    static bool isRightFlickerLedOn;
-    static bool isRightFlickerEnabled;
-    static unsigned long lastRightFlickerToggleTime;
+    static bool isRightIndicatorLedOn;
+    static bool isRightIndicatorEnabled;
+    static unsigned long lastRightIndicatorToggleTime;
 
-    static void toggleLeftFlicker();
-    static void updateLeftFlicker();
+    static void toggleLeftIndicator();
+    static void updateLeftIndicator();
 
     static void toggleHazardLights();
 
-    static void toggleRightFlicker();
-    static void updateRightFlicker();
+    static void toggleRightIndicator();
+    static void updateRightIndicator();
 
     static bool areHazardsOn();
 
@@ -56,8 +56,8 @@ public:
         uint8_t maxBrightness;
     };
 
-    static constexpr LightConfig LeftFlicker = {7, 0, 255};
-    static constexpr LightConfig RightFlicker = {8, 0, 255};
+    static constexpr LightConfig LeftIndicator = {7, 0, 255};
+    static constexpr LightConfig RightIndicator = {8, 0, 255};
     static constexpr LightConfig HeadLights = {5, 40, 255};
     static constexpr LightConfig RearLights = {6, 40, 255}; // pin, defaultBrightness, maxBrighntess
 

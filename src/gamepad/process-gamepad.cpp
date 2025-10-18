@@ -28,16 +28,16 @@ void processGamepad(ControllerPtr ctl)
         Car::toggleBrightHeadLights();
     }
 
-    // Toggle left flicker light.
+    // Toggle left Indicator light.
     if (ctl->dpad() & 0x08)
     {
-        Car::toggleLeftFlicker();
+        Car::toggleLeftIndicator();
     }
 
-    // Toggle right flicker light.
+    // Toggle right Indicator light.
     if (ctl->dpad() & 0x04)
     {
-        Car::toggleRightFlicker();
+        Car::toggleRightIndicator();
     }
 
     // Toggle hazard light.
