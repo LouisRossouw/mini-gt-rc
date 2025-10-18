@@ -33,8 +33,13 @@ public:
 
     // Headlights
     static bool isHeadLightsEnabled;
+    static bool isHeadLightsBrightsEnabled;
     static void toggleHeadLights();
     static void toggleLights();
+    static void toggleBrightHeadLights();
+
+    static int driveMode;
+    static void toggleDriveMode();
 
     static bool activeDrive;
     static void driveForward();
@@ -51,10 +56,10 @@ public:
         uint8_t maxBrightness;
     };
 
-    static constexpr LightConfig LeftFlicker = {21, 0, 255}; // pin, defaultBrightness, maxBrightness
-    static constexpr LightConfig RightFlicker = {20, 0, 255};
-    static constexpr LightConfig HeadLights = {2, 0, 255};
-    static constexpr LightConfig RearLights = {1, 40, 255};
+    static constexpr LightConfig LeftFlicker = {7, 0, 255};
+    static constexpr LightConfig RightFlicker = {8, 0, 255};
+    static constexpr LightConfig HeadLights = {5, 40, 255};
+    static constexpr LightConfig RearLights = {6, 40, 255}; // pin, defaultBrightness, maxBrighntess
 
     // Motor configuration
     struct MotorConfig

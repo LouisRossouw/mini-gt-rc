@@ -2,11 +2,12 @@
 #include <Arduino.h>
 #include <Bluepad32.h>
 
-ServoStep myServo(3, 2);
-ServoStep myServoTest(4, 4);
+ServoStep myServo(3, 2);     // Drive
+ServoStep myServoTest(4, 5); // Steering
 
 void setup()
 {
+  delay(5000);
   Serial.begin(115200);
   Serial.printf("Firmware: %s\n", BP32.firmwareVersion());
   const uint8_t *addr = BP32.localBdAddress();
@@ -22,7 +23,7 @@ void setupPins()
 {
   // Updating lights with PWM signla; to simulate brake lights
   const int rearLightPin = Car::RearLights.pin;
-  const int pwmChannel = Car::RearLights.pin;
+  const int pwmChannel = 0;
   const int pwmFreq = 5000;
   const int pwmResolution = 8;
 
@@ -30,8 +31,13 @@ void setupPins()
   ledcSetup(pwmChannel, pwmFreq, pwmResolution);
   ledcAttachPin(rearLightPin, pwmChannel);
 
-  // Headlights
-  pinMode(Car::HeadLights.pin, OUTPUT);
+  const int headLightsPin = Car::HeadLights.pin;
+  const int hdpwmChannel = 1;
+  const int hdpwmFreq = 4000;
+  const int hdpwmResolution = 8;
+
+  ledcSetup(hdpwmChannel, hdpwmFreq, hdpwmResolution);
+  ledcAttachPin(headLightsPin, hdpwmChannel);
 
   // indicators
   pinMode(Car::LeftFlicker.pin, OUTPUT);

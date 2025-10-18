@@ -1,6 +1,7 @@
 #include "car.h"
 #include "../globals.h"
 #include <Arduino.h>
+#include "../dev/dev.h"
 
 // Left indicators
 bool Car::isLeftFlickerLedOn = false;
@@ -14,6 +15,7 @@ unsigned long Car::lastRightFlickerToggleTime = 0;
 
 // Headlights
 bool Car::isHeadLightsEnabled = false;
+bool Car::isHeadLightsBrightsEnabled = false;
 
 // Rearlights
 bool Car::isRearLightsEnabled = false;
@@ -26,11 +28,22 @@ bool Car::activeDrive = false;
 int maxBrightness = Car::RearLights.maxBrightness;
 int defaultBrightness = Car::RearLights.defaultBrightness;
 
+int Car::driveMode = 0;
+
 // TODO; Rename flicker to indicator
 // TODO; Fix file names / investigate as to why they are capitalized? is that a c++ must?
 
-void Car::toggleLeftFlicker()
+void Car::toggleDriveMode()
+{
+    driveMode += 1;
 
+    if (driveMode > 2)
+    {
+        driveMode = 0;
+    }
+}
+
+void Car::toggleLeftFlicker()
 {
     isLeftFlickerEnabled = !isLeftFlickerEnabled;
 
@@ -117,20 +130,38 @@ void Car::toggleLights()
     isHeadLightsEnabled = activeLights;
     isRearLightsEnabled = activeLights;
 
-    digitalWrite(Car::HeadLights.pin, activeLights ? HIGH : LOW);
-    ledcWrite(Car::RearLights.pin, activeLights ? defaultBrightness : 0);
+    ledcWrite(1, activeLights ? defaultBrightness : 0);
+    ledcWrite(0, activeLights ? defaultBrightness : 0);
 }
 
 void Car::toggleHeadLights()
 {
     isHeadLightsEnabled = !isHeadLightsEnabled;
-    digitalWrite(Car::HeadLights.pin, isHeadLightsEnabled ? LOW : HIGH);
+    ledcWrite(1, isHeadLightsEnabled ? defaultBrightness : 0);
 }
 
 void Car::toggleRearLights()
 {
     isRearLightsEnabled = !isRearLightsEnabled;
-    ledcWrite(Car::RearLights.pin, isRearLightsEnabled ? defaultBrightness : 0);
+    ledcWrite(0, isRearLightsEnabled ? defaultBrightness : 0);
+}
+
+void Car::toggleBrightHeadLights()
+{
+
+    isHeadLightsBrightsEnabled = !isHeadLightsBrightsEnabled;
+    if (isHeadLightsBrightsEnabled)
+    {
+        ledcWrite(1, maxBrightness);
+    }
+    else if (isHeadLightsEnabled)
+    {
+        ledcWrite(1, defaultBrightness);
+    }
+    else
+    {
+        ledcWrite(1, 0);
+    }
 }
 
 void Car::toggleBrakeLights()
@@ -139,15 +170,15 @@ void Car::toggleBrakeLights()
     isBreakLightsEnabled = !isBreakLightsEnabled;
     if (isBreakLightsEnabled)
     {
-        ledcWrite(Car::RearLights.pin, maxBrightness);
+        ledcWrite(0, maxBrightness);
     }
     else if (isRearLightsEnabled)
     {
-        ledcWrite(Car::RearLights.pin, defaultBrightness);
+        ledcWrite(0, defaultBrightness);
     }
     else
     {
-        ledcWrite(Car::RearLights.pin, 0);
+        ledcWrite(0, 0);
     }
 }
 

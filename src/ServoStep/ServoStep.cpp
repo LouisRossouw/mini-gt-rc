@@ -2,8 +2,7 @@
 #include "ServoStep.h"
 #include "../globals.h"
 
-// Updating the servo with PWN signals, as there is no servo lib for esp32-c3
-// * Works great with the servo plugged into 3v and not 5v.
+#include "../car/car.h"
 
 ServoStep::ServoStep(int pin, int channel)
 {
@@ -20,23 +19,73 @@ void ServoStep::servoSet(int angle)
     delay(300);
 }
 
-// Forward declare fmap
+// // Forward declare fmap
 float fmap(float x, float in_min, float in_max, float out_min, float out_max);
 
-// Drive wheels forward or backwards.
-void ServoStep::servoSpin(int speed)
-{
-    float duty = fmap(speed, -512.0, 512.0, 120.0, 130.0);
-    ledcWrite(_channel, duty);
-    Dev::log(String(speed) + " | " + String(duty));
-}
-
-// Turn wheels left or right.
+// // Turn wheels left or right.
 void ServoStep::servoTurn(int angle)
 {
-    float duty = fmap(angle, -512.0, 512.0, 50.0, 95.0);
+    float duty = fmap(angle, -512.0, 512.0, 60, 100.0);
     ledcWrite(_channel, duty);
     Dev::log(String(angle) + " -|- " + String(duty));
+}
+
+void ServoStep::servoSpin(int speed)
+{
+    // This works great on an sg90 servo with the potentiometer replaced with two resistors.
+    float duty;
+
+    static int prevSpeed = 0;
+    static bool brakesOn = false;
+    static unsigned long brakeStartTime = 0;
+
+    // Detect forward → stop transition
+    bool wasMovingForward = prevSpeed > 100; // threshold for "moving"
+    bool nowStopped = (speed > -50 && speed < 50);
+
+    if (wasMovingForward && nowStopped)
+    {
+        Car::toggleBrakeLights();
+        brakesOn = true;
+        brakeStartTime = millis();
+    }
+
+    // Turn off brakes after 1 second
+    if (brakesOn && (millis() - brakeStartTime > 1000))
+    {
+        Car::toggleBrakeLights();
+        brakesOn = false;
+    }
+
+    // Servo control
+    if (speed > -50 && speed < 50)
+    {
+        duty = 78.2;
+    }
+    else
+    {
+        // Normal speed
+        if (Car::driveMode == 0)
+        {
+            duty = fmap(speed, -512.0, 512.0, 75.0, 80.0);
+        }
+        // Sport speed
+        else if (Car::driveMode == 1)
+        {
+            duty = fmap(speed, -512.0, 512.0, 73.0, 83.0);
+        }
+        // Donuts power!!!!
+        else if (Car::driveMode == 2)
+        {
+            duty = fmap(speed, -512.0, 512.0, 70.0, 95.0);
+        }
+    }
+
+    ledcWrite(_channel, duty);
+
+    prevSpeed = speed;
+
+    Dev::log(String(speed) + " | " + String(duty));
 }
 
 float fmap(float x, float in_min, float in_max, float out_min, float out_max)

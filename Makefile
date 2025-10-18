@@ -4,7 +4,7 @@
 # Need to compile with this core for arduino-cli
 # **** Bluepad32: esp32-c3 ****
 FQBN=esp32-bluepad32:esp32:lolin_c3_mini
-PORT=COM8
+PORT=COM10
 
 # **** Bluepad32: esp32-wroom-32 ****
 # FQBN=esp32-bluepad32:esp32:esp32da
