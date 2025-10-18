@@ -21,7 +21,7 @@ Short Gif:
 
 ## Parts used in the demo gif:
 - esp32 c3 super mini
-- sg90 servo
+- sg90 servo (removed potentiometer and replaced with two resistors)
 - 1.5g digital linear brushless servo
 - 2x4x2.5 miniature ball bearings
 - 6 smd leds, oragne, red, white
