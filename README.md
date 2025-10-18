@@ -19,7 +19,7 @@ Short Gif:
 - Left indicator pin: `7`
 - Right indicator pin: `8`
 
-## Parts used in the demo gif:
+## 🛠️ Parts used in the demo gif:
 - esp32 c3 super mini
 - sg90 servo (removed potentiometer and replaced with two resistors)
 - 1.5g digital linear brushless servo
@@ -33,9 +33,6 @@ Short Gif:
 - Uses `arduinio_cli` to compile and upload
 - If on windows, use git bash in project directory to run `./Makefile`
 - Use the commands in the Makefile to compile / upload / monitor to esp32-c3 board. ie; run `make` or `make monitor` etc
-
-Tips;
-For arduino-cli + bluepad32, need to compile with esp32-bluepad32:esp32:lolin_c3_mini
 
 ## Reminder for self
 - all of my esp32 c3 boards automatically reset after upload except for one board, 
