@@ -14,3 +14,13 @@ For arduino-cli + bluepad32, need to compile with esp32-bluepad32:esp32:lolin_c3
 - press button Y + B at the same time enables dumpGamepad and outputs button values
 
 TODO: fix intellisense
+
+In action!
+
+YouTube;
+https://www.youtube.com/shorts/F8KlSNT8m0E
+
+Short Gif:
+![pies2 (1)](https://github.com/user-attachments/assets/f3198826-a7c1-49fc-82de-3c3a2836c1fd)
+
+
