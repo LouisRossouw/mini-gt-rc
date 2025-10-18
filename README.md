@@ -1,5 +1,5 @@
 
-# 🏎️ ESP32C3 MICRO RC
+# 🏎️ ESP32 C3 Super Mini Micro RC
 ### Firmware for my micro RC; using an xbox one controller + an esp32-c3 super mini + Mini GT #658 1:64 car.
 
 YouTube;
@@ -33,8 +33,6 @@ Short Gif:
 - Uses `arduinio_cli` to compile and upload
 - If on windows, use git bash in project directory to run `./Makefile`
 - Use the commands in the Makefile to compile / upload / monitor to esp32-c3 board. ie; run `make` or `make monitor` etc
-
-- press button Y + B at the same time enables dumpGamepad and outputs button values
 
 Tips;
 For arduino-cli + bluepad32, need to compile with esp32-bluepad32:esp32:lolin_c3_mini
